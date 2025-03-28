@@ -9,24 +9,23 @@
     };
   };
 
-
   outputs = { self, nixpkgs, homeManager }: {
     homeConfigurations = {
       "birb@QuarkPenguin" = homeManager.lib.homeManagerConfiguration {
-        configuration = {pkgs, ...}: {
-          programs.home-manager.enable = true;
-          home.packages = [
-            pkgs.antora
-          ];
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
         };
-
-        # extraSpecialArgs = {
-        #   inherit deploy-rs;
-        # };
-        system = "x86_64-linux";
-        homeDirectory = "/home/birb";
-        username = "birb";
-        stateVersion = "24.11";
+        modules = [
+          pkgs.antora
+          {
+            home = {
+              homeDirectory = "/home/birb";
+              username = "birb";
+              stateVersion = "24.11";
+            };
+          }
+        ];
       };
     };
   };
