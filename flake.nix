@@ -16,17 +16,7 @@
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
-        modules = [
-          ({ pkgs, ... }: {
-            programs.home-manager.enable = true;
-            home = {
-              homeDirectory = "/home/birb";
-              username = "birb";
-              stateVersion = "24.11";
-              packages = with pkgs; [ antora tree ];
-            };
-          })
-        ];
+        modules = [ ./modules/home.nix ];
       };
     };
   };
