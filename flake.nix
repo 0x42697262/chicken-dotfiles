@@ -2,7 +2,7 @@
   description = "0x42697262's Home manager configurations using Flakes";
 
   inputs = {
-    nixpkgs.url = "flake:nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     homeManager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,16 +16,14 @@
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
-        modules = [
-          pkgs.antora
-          {
-            home = {
-              homeDirectory = "/home/birb";
-              username = "birb";
-              stateVersion = "24.11";
-            };
-          }
-        ];
+        modules = [{
+          home = {
+            homeDirectory = "/home/birb";
+            username = "birb";
+            stateVersion = "24.11";
+            packages = [ nixpkgs.antora nixpkgs.tree ];
+          };
+        }];
       };
     };
   };
