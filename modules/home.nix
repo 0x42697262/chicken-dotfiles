@@ -4,6 +4,6 @@
     homeDirectory = "/home/birb";
     username = "birb";
     stateVersion = "24.11";
-    packages = with pkgs; [ antora tree ];
+    packages = with pkgs; [ antora tree firefox ];
   };
 }
