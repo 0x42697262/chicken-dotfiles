@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  configNames = [ "fish" "nvim" "btop" "kitty" ];
+  configNames = [ "fish" "nvim" "btop" "kitty" "git" ];
   mkConfig = name: {
     source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/.config/home-manager/configs/${name}";
