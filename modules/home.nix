@@ -8,7 +8,8 @@
   };
   xdg.configFile = {
     "fish" = {
-      source = config.lib.file.mkOutOfStoreSymlink "./configs/fish";
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/.config/home-manager/configs/fish";
       recursive = true;
     };
   };
