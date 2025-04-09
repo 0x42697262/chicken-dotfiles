@@ -8,11 +8,12 @@
     stateVersion = "24.11";
     packages = with pkgs; [
       antora
-      tree
-      firefox
-      vesktop
       asciidoc-full-with-plugins
       asciidoctor-with-extensions
+      firefox
+      tree
+      vesktop
+      zathura
     ];
   };
 }
