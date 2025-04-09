@@ -10,6 +10,7 @@
       antora
       asciidoc-full-with-plugins
       asciidoctor-with-extensions
+      calibre
       firefox
       tree
       vesktop
