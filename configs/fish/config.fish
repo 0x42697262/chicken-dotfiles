@@ -33,3 +33,9 @@ function fish_greeting
     set_color normal
     echo
 end
+
+set CACHYOS_FISH_CONFIG_PATH /usr/share/cachyos-fish-config/
+if test -d $CACHYOS_FISH_CONFIG_PATH
+    source $CACHYOS_FISH_CONFIG_PATH/cachyos-config.fish
+end
+
