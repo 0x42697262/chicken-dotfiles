@@ -10,10 +10,8 @@
       antora
       asciidoc-full-with-plugins
       asciidoctor-with-extensions
-      firefox
       tree
       vesktop
-      zathura
     ];
   };
 }
