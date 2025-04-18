@@ -1,0 +1,6 @@
+[core]
+	cliptimeout = 10
+[mounts]
+	path = /home/birb/.local/share/gopass/stores/root
+[recipients]
+	hash = a1b7a71e7313854d9542e17e5a1f91f4d298e60845953fa38d003fd7be920975
