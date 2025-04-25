@@ -10,7 +10,6 @@
       antora
       asciidoc-full-with-plugins
       asciidoctor-with-extensions
-      opentabletdriver
       tree
       vesktop
       zathura
