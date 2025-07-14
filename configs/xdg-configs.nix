@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  configNames = [ "fish" "nvim" "btop" "kitty" "git" "mako" "gopass" "hypr" ];
+  configNames = [ "fish" "nvim" "btop" "kitty" "git" "mako" "gopass" "hypr" "user-dirs.dirs" "user-dirs.locale"];
   homeConfigNames = [ ".gnupg/gpg-agent.conf" ".ssh/config" ];
   mkConfig = name: {
     source = config.lib.file.mkOutOfStoreSymlink
