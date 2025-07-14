@@ -11,6 +11,15 @@
 
   outputs = { self, nixpkgs, homeManager }: {
     homeConfigurations = {
+      "birb@emu" = homeManager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        modules = [ ./modules/home.nix ];
+      };
+    };
+    homeConfigurations = {
       "birb@PlasmaPhoenix" = homeManager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
