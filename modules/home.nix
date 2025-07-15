@@ -13,6 +13,7 @@
       tree
       vesktop
       zathura
+      xorg.xhost
     ];
   };
 }
