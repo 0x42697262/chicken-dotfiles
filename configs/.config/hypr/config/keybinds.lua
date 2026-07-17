@@ -80,24 +80,24 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"), { repea
 -- ======= Window Actions =======
 
 -- Move window towards a direction
-hl.bind("ALT_R + SHIFT + " .. d.left,  hl.dsp.window.move({ direction = "l" }))
-hl.bind("ALT_R + SHIFT + " .. d.right, hl.dsp.window.move({ direction = "r" }))
-hl.bind("ALT_R + SHIFT + " .. d.up,    hl.dsp.window.move({ direction = "u" }))
-hl.bind("ALT_R + SHIFT + " .. d.down,  hl.dsp.window.move({ direction = "d" }))
+hl.bind("SHIFT + ALT_R + " .. d.left,  hl.dsp.window.move({ direction = "l" }))
+hl.bind("SHIFT + ALT_R + " .. d.right, hl.dsp.window.move({ direction = "r" }))
+hl.bind("SHIFT + ALT_R + " .. d.up,    hl.dsp.window.move({ direction = "u" }))
+hl.bind("SHIFT + ALT_R + " .. d.down,  hl.dsp.window.move({ direction = "d" }))
 -- Move focus with MOD + arrow keys
 hl.bind("ALT_R + " .. d.left,  hl.dsp.focus({ direction = "l" }))
 hl.bind("ALT_R + " .. d.right, hl.dsp.focus({ direction = "r" }))
 hl.bind("ALT_R + " .. d.up,    hl.dsp.focus({ direction = "u" }))
 hl.bind("ALT_R + " .. d.down,  hl.dsp.focus({ direction = "d" }))
 -- Quick resize window with keyboard
-hl.bind("ALT_R + CTRL + SHIFT + " .. d.right, hl.dsp.window.resize({ x = 15,  y = 0,   relative = true }), { repeating = true })
-hl.bind("ALT_R + CTRL + SHIFT + " .. d.left,  hl.dsp.window.resize({ x = -15, y = 0,   relative = true }), { repeating = true })
-hl.bind("ALT_R + CTRL + SHIFT + " .. d.up,    hl.dsp.window.resize({ x = 0,   y = -15, relative = true }), { repeating = true })
-hl.bind("ALT_R + CTRL + SHIFT + " .. d.down,  hl.dsp.window.resize({ x = 0,   y = 15,  relative = true }), { repeating = true })
+hl.bind("CTRL + SHIFT + ALT_R + " .. d.right, hl.dsp.window.resize({ x = 15,  y = 0,   relative = true }), { repeating = true })
+hl.bind("CTRL + SHIFT + ALT_R + " .. d.left,  hl.dsp.window.resize({ x = -15, y = 0,   relative = true }), { repeating = true })
+hl.bind("CTRL + SHIFT + ALT_R + " .. d.up,    hl.dsp.window.resize({ x = 0,   y = -15, relative = true }), { repeating = true })
+hl.bind("CTRL + SHIFT + ALT_R + " .. d.down,  hl.dsp.window.resize({ x = 0,   y = 15,  relative = true }), { repeating = true })
 -- Cycle
 hl.bind("ALT_R + ESCAPE",      hl.dsp.window.cycle_next({ next = true }),               { repeating = true })
 hl.bind("ALT_R + TAB",         hl.dsp.window.cycle_next({ next = true, tiled = true }), { repeating = true })
-hl.bind("ALT_R + SHIFT + TAB", hl.dsp.window.cycle_next({ next = false }),              { repeating = true })
+hl.bind("SHIFT + ALT_R + TAB", hl.dsp.window.cycle_next({ next = false }),              { repeating = true })
 
 -- Move active window to a workspace with SUPER + CTRL + [0-9]
 hl.bind("SUPER + CTRL + Tab",         hl.dsp.window.move({ workspace = "+1" }))
