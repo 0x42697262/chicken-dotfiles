@@ -8,6 +8,15 @@ local LMB = "mouse:272"
 local RMB = "mouse:273"
 local KP_1 = "code:87"
 
+local workspace_keys = { "1", "2", "3", "4", "q", "w", "e", "r", "a", "s", "d", "f" }
+local workspace_actions = {}
+for _, key in ipairs(workspace_keys) do
+	local workspace = "name:" .. key
+	workspace_actions[#workspace_actions + 1] = hl.dsp.focus({ workspace = workspace })
+	workspace_actions[#workspace_actions + 1] = hl.dsp.window.move({ workspace = workspace })
+	workspace_actions[#workspace_actions + 1] = hl.dsp.window.move({ workspace = workspace, follow = false })
+end
+
 -- ======= Keymap =======
 --
 -- One entry per logical keybind: the action is defined once, the key specs for
@@ -464,63 +473,10 @@ local keymap = {
 		chord = "SUPER + M; {comma,period,slash}",
 	},
 
-	-- Workspaces 1-10: switch / move window / move window without following
+	-- Named workspaces: switch / move window / move window without following
 	{
-		action = {
-			hl.dsp.focus({ workspace = "name:1" }),
-			hl.dsp.focus({ workspace = "name:2" }),
-			hl.dsp.focus({ workspace = "name:3" }),
-			hl.dsp.focus({ workspace = "name:4" }),
-
-			hl.dsp.focus({ workspace = "name:q" }),
-			hl.dsp.focus({ workspace = "name:w" }),
-			hl.dsp.focus({ workspace = "name:e" }),
-			hl.dsp.focus({ workspace = "name:r" }),
-
-			hl.dsp.focus({ workspace = "name:a" }),
-			hl.dsp.focus({ workspace = "name:s" }),
-			hl.dsp.focus({ workspace = "name:d" }),
-			hl.dsp.focus({ workspace = "name:f" }),
-		},
-		chord = "SUPER + W; {1-4,q,w,e,r,a,s,d,f}",
-	},
-	{
-		action = {
-			hl.dsp.window.move({ workspace = "name:1" }),
-			hl.dsp.window.move({ workspace = "name:2" }),
-			hl.dsp.window.move({ workspace = "name:3" }),
-			hl.dsp.window.move({ workspace = "name:4" }),
-
-			hl.dsp.window.move({ workspace = "name:q" }),
-			hl.dsp.window.move({ workspace = "name:w" }),
-			hl.dsp.window.move({ workspace = "name:e" }),
-			hl.dsp.window.move({ workspace = "name:r" }),
-
-			hl.dsp.window.move({ workspace = "name:a" }),
-			hl.dsp.window.move({ workspace = "name:s" }),
-			hl.dsp.window.move({ workspace = "name:d" }),
-			hl.dsp.window.move({ workspace = "name:f" }),
-		},
-		chord = "SUPER + W; SHIFT + {1-4,q,w,e,r,a,s,d,f}",
-	},
-	{
-		action = {
-			hl.dsp.window.move({ workspace = "name:1", follow = false }),
-			hl.dsp.window.move({ workspace = "name:2", follow = false }),
-			hl.dsp.window.move({ workspace = "name:3", follow = false }),
-			hl.dsp.window.move({ workspace = "name:4", follow = false }),
-
-			hl.dsp.window.move({ workspace = "name:q", follow = false }),
-			hl.dsp.window.move({ workspace = "name:w", follow = false }),
-			hl.dsp.window.move({ workspace = "name:e", follow = false }),
-			hl.dsp.window.move({ workspace = "name:r", follow = false }),
-
-			hl.dsp.window.move({ workspace = "name:a", follow = false }),
-			hl.dsp.window.move({ workspace = "name:s", follow = false }),
-			hl.dsp.window.move({ workspace = "name:d", follow = false }),
-			hl.dsp.window.move({ workspace = "name:f", follow = false }),
-		},
-		chord = "SUPER + W; CTRL + {1-4,q,w,e,r,a,s,d,f}",
+		action = workspace_actions,
+		chord = "SUPER + W; {_,SHIFT+,CTRL+}{" .. table.concat(workspace_keys, ",") .. "}",
 	},
 }
 
