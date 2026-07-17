@@ -15,6 +15,7 @@ require("config/environment")
 require("config/input")
 require("config/keybinds")
 require("config/monitor")
+require("config/plugins")
 require("config/variables")
 require("config/windowrules")
 
