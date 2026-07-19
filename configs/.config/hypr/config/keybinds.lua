@@ -23,9 +23,9 @@ end
 -- both systems sit side by side.
 --
 --   entry = {
+--       action = <dispatcher|function|string> | { ... }, -- what fires
 --       bind   = "<hl.bind key string>" | { ... }, -- plain hyprland bind spec(s)
 --       chord  = "<STEP ; STEP ...>",              -- hyprchords chain spec (steps only)
---       action = <dispatcher|function|string> | { ... }, -- what fires
 --       opts   = { ... },                          -- hl.bind options (plain bind only)
 --   }
 --
@@ -62,11 +62,6 @@ local keymap = {
 		chord = "PRINT",
 	},
 	{
-		action = hl.dsp.exec_cmd([[loginctl terminate-user ""]]),
-		bind = "SUPER + CTRL + ALT + F4",
-		chord = "SUPER + CTRL + ALT + F4",
-	},
-	{
 		action = hl.dsp.exec_cmd(d.applauncher),
 		bind = "ALT + SPACE",
 		chord = "ALT + SPACE",
@@ -99,20 +94,11 @@ local keymap = {
 	-- ':' = locked mode: stays at the chain tail, repeat the final key freely,
 	-- no timeout; only abort_key exits
 	{
-		action = hl.dsp.window.resize({
-			x = -40,
-			y = 0,
-			relative = true,
-		}),
-		chord = "SUPER+R : H",
-	},
-	{
-		action = hl.dsp.window.resize({
-			x = 40,
-			y = 0,
-			relative = true,
-		}),
-		chord = "SUPER+R : L",
+		action = {
+			hl.dsp.window.resize({ x = -40, y = 0, relative = true }),
+			hl.dsp.window.resize({ x = 40, y = 0, relative = true }),
+		},
+		chord = "SUPER+R : {H,L}",
 	},
 
 	-- command-only {} groups cycle per press (sxhkd cycling) -> legacy string action
@@ -124,42 +110,43 @@ local keymap = {
 
 	-- ======= Windows =======
 	{
-		action = hl.dsp.window.fullscreen({ mode = "maximized" }),
-		bind = "SUPER + CTRL + F",
-		chord = "SUPER + CTRL + F",
-	}, -- monocle
-	{
-		action = hl.dsp.window.fullscreen_state({
-			internal = 0,
-			client = 2,
-		}),
-		bind = "SUPER + SHIFT + F",
-		chord = "SUPER + SHIFT + F",
-	}, -- fake fullscreen
-	{
-		action = hl.dsp.window.fullscreen(),
-		bind = "SUPER + F",
-		chord = "SUPER + F",
+		action = {
+			hl.dsp.window.fullscreen(),
+			hl.dsp.window.fullscreen({ mode = "maximized" }), -- monocle
+			hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }), -- fake fullscreen
+		},
+		bind = {
+			"SUPER + F",
+			"SUPER + CTRL + F",
+			"SUPER + SHIFT + F",
+		},
+		chord = "SUPER + {_, CTRL, SHIFT} + F",
 	},
 	{
-		action = hl.dsp.window.close(),
-		bind = "ALT + F4",
-		chord = "ALT + F4",
+		action = {
+			hl.dsp.window.close(),
+			hl.dsp.window.kill(),
+			hl.dsp.exec_cmd([[loginctl terminate-user ""]]),
+		},
+		bind = {
+			"ALT + F4",
+			"SUPER + ALT + F4",
+			"SUPER + CTRL + ALT + F4",
+		},
+		chord = "ALT + {_, ALT +, CTRL + ALT + } F4",
 	},
 	{
-		action = hl.dsp.window.kill(),
-		bind = "SUPER + ALT + F4",
-		chord = "SUPER + ALT + F4",
-	},
-	{
-		action = hl.dsp.window.float(),
-		bind = "ALT_R + F",
-		chord = "ALT_R + F",
-	},
-	{
-		action = hl.dsp.window.center(),
-		bind = "ALT_R + C",
-		chord = "ALT_R + C",
+		action = {
+			hl.dsp.window.float(),
+			hl.dsp.window.center(),
+			hl.dsp.window.pin(),
+		},
+		bind = {
+			"ALT_R + F",
+			"ALT_R + C",
+			"ALT_R + Y",
+		},
+		chord = "ALT_R + {F,C,Y}",
 	},
 	{
 		action = hl.dsp.layout("togglesplit"),
@@ -167,50 +154,37 @@ local keymap = {
 		chord = "ALT_R + S",
 	}, -- dwindle, needs preserve_split
 	{
-		action = hl.dsp.window.pin(),
-		bind = "ALT_R + Y",
-		chord = "ALT_R + Y",
+		action = {
+			hl.dsp.window.resize(), -- Resize the window towards a direction
+			hl.dsp.window.drag(), -- Drag window
+		},
+		bind = {
+			"SUPER + " .. RMB,
+			"SUPER + " .. LMB,
+		},
+		opts = {
+			mouse = true,
+		},
 	},
-	{
-		action = hl.dsp.window.resize(),
-		bind = "SUPER + " .. RMB,
-		opts = {
-			mouse = true,
-		},
-	}, -- Resize the window towards a direction
-	{
-		action = hl.dsp.window.drag(),
-		bind = "SUPER + " .. LMB,
-		opts = {
-			mouse = true,
-		},
-	}, -- Drag window
 
 	-- ======= Grouping Windows =======
 	{
-		action = hl.dsp.group.toggle(),
-		bind = "SUPER + G",
-		chord = "SUPER + G",
-	},
-
-	{
-		action = hl.dsp.window.move({
-			out_of_group = true,
-		}),
-		bind = "SUPER + SHIFT + G",
-		chord = "SUPER + SHIFT + G",
-	},
-
-	{
-		action = hl.dsp.group.prev(),
-		chord = "SUPER + A; G; SHIFT+TAB",
-		opts = {
-			repeating = true,
+		action = {
+			hl.dsp.group.toggle(),
+			hl.dsp.window.move({ out_of_group = true }),
 		},
+		bind = {
+			"SUPER + G",
+			"SUPER + SHIFT + G",
+		},
+		chord = "SUPER + {_,SHIFT} + G",
 	},
 	{
-		action = hl.dsp.group.next(),
-		chord = "SUPER + A; G; TAB",
+		action = {
+			hl.dsp.group.prev(),
+			hl.dsp.group.next(),
+		},
+		chord = "SUPER + A; G; {_,SHIFT+}TAB",
 		opts = {
 			repeating = true,
 		},
