@@ -17,6 +17,9 @@
       vesktop
       zathura
       xorg.xhost
+      # Mesa wrapper so nix-store GUI apps (caelestia) find the host's
+      # AMD Mesa drivers; drives radeonsi/iGPU and forces the Mesa EGL vendor.
+      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
     ];
   };
 

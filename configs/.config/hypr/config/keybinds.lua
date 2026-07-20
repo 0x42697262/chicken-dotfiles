@@ -7,6 +7,7 @@ local d = require("config/defaults")
 local LMB = "mouse:272"
 local RMB = "mouse:273"
 local KP_1 = "code:87"
+local ALT_R = "code:108"
 
 local workspace_keys = { "1", "2", "3", "4", "q", "w", "e", "r", "a", "s", "d", "f" }
 local workspace_actions = {}
@@ -150,8 +151,7 @@ local keymap = {
 	},
 	{
 		action = hl.dsp.layout("togglesplit"),
-		bind = "ALT_R + S",
-		chord = "ALT_R + S",
+		chord = "Alt_R + S",
 	}, -- dwindle, needs preserve_split
 	{
 		action = {

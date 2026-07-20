@@ -11,6 +11,7 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = { self, nixpkgs, homeManager, ... }@inputs:
